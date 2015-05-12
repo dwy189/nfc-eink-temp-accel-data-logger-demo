@@ -19,16 +19,17 @@
 #include "myE-paperApp.h"
 #include "../common/fram_memory.h"
 
-uint8_t dataAddress= 0x00007; // First three bytes for address; two bytes for current number of packagee; in next one byte,
+uint8_t dataAddress= 0x00007; // Starting from 0x07 because First three bytes for address; two bytes for current number of packagee; in next one byte,
 								//first 4 bits are for number of bytes per package
 								// next 3 bits are for time interval and the last bit is for overflow flag
 
-struct FRAM_Status{
+/*static struct FRAM_Status{
 	uint8_t curentAddress;
-	uint8_t lengthPerPac;
+	uint16_t countOfPack;
+	uint8_t lengthPerPack;
 	unsigned char interval;
 	unsigned char overflow;
-}mystruct;
+}mystruct;*/
 
 
 /**
@@ -60,8 +61,8 @@ uint8_t updateDisplay1(unsigned char* imagePtr){
 		 value = 0xFF;
 		 if(indicator>0)indicator--;//reduce counter in order to stop indicator after refresh
 	 }
-	 FRAM_Status mystruct;
-	 mystruct.curentAddress = 0x09;
+	 struct FRAM_Status mystruct;
+	 mystruct.currentAddress = 0x09;
 	 // store the x,y, temperature data and x,y,z acceleration, motion data to one allData
 	 //uint8_t allData[7];
 	 /*uint8_t j;

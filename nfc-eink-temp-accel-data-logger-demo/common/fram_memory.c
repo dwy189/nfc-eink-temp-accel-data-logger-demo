@@ -9,6 +9,7 @@
 #include "../UserApp/myE-paperApp.h"
 
 extern struct FRAM_Status;
+
 uint8_t const FRAM_Sleep[] = {0xB9};
 uint8_t const ReadStatus[] = {0x05,0x00};
 uint8_t const ReadDeviceID[]={0x9F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
@@ -59,7 +60,7 @@ uint8_t SPI_FRAM_Read_Status_Register(void) {
 	return gpRxBuf[1];
 }
 
-void SPI_FRAM_Write(const uint8_t *bufferData, FRAM_Status* allData) {
+void SPI_FRAM_Write(const uint8_t *bufferData, struct FRAM_Status* allData) {
 	// CS low
 	//SPI_CS_MEM_OUT &= ~SPI_CS_MEM_BIT;
 	//op code: 0x02 for write data
